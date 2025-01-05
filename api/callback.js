@@ -1,19 +1,17 @@
-const express = require("express");
-const app = express();
-const path = require("path");
+export default function handler(req, res) {
+    try {
+        const accessToken = req.query.access_token;
 
-// API Callback
-app.get("/callback", (req, res) => {
-    const accessToken = req.query.access_token;
-    if (accessToken) {
+        // Periksa apakah access_token tersedia
+        if (!accessToken) {
+            return res.status(400).json({ error: "Access Token not found" });
+        }
+
+        // Redirect ke Unity dengan access token
         const redirectUnity = `unitydl://aurality?access_token=${accessToken}`;
-        res.redirect(redirectUnity);
-    } else {
-        res.status(400).send("Access Token not found");
+        res.redirect(307, redirectUnity); // Gunakan 307 untuk redirect sementara
+    } catch (error) {
+        console.error("Error in callback handler:", error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
-});
-
-// Serve HTML
-app.use("/callback", express.static(path.join(__dirname, "callback")));
-
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+}
