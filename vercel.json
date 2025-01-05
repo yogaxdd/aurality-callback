@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/callback",
+      "dest": "/api/callback"
+    },
+    {
+      "src": "/callback/",
+      "dest": "/callback/index.html"
+    }
+  ]
+}
