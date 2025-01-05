@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aurality Callback</title>
+    <script>
+        window.onload = function () {
+            // Ekstrak token dari URL
+            const urlParams = new URLSearchParams(window.location.hash.substring(1));
+            const accessToken = urlParams.get('access_token');
+
+            if (accessToken) {
+                // Simpan token ke localStorage
+                localStorage.setItem('spotifyToken', accessToken);
+                // Redirect ke aplikasi Unity
+                window.location.href = 'aurality://spotify-auth';
+            } else {
+                document.body.innerHTML = "<h1>Authentication failed!</h1>";
+            }
+        };
+    </script>
+</head>
+<body>
+    <h1>Processing authentication...</h1>
+</body>
+</html>
