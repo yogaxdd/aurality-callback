@@ -8,23 +8,27 @@
 <body>
     <h1>Processing Access Token...</h1>
     <script>
-        <script>
-    const hash = window.location.hash;
-    console.log("URL Fragment:", hash);
+        // Ambil fragment dari URL
+        const hash = window.location.hash;
+        console.log("URL Fragment:", hash);
 
-    const tokenMatch = hash.match(/access_token=([^&]+)/);
-    const accessToken = tokenMatch ? tokenMatch[1] : null;
+        // Ekstrak access_token dari fragment
+        const tokenMatch = hash.match(/access_token=([^&]+)/);
+        const accessToken = tokenMatch ? tokenMatch[1] : null;
 
-    if (accessToken) {
-        console.log("Access Token Found:", accessToken);
-        const redirectUrl = `/api/callback?access_token=${accessToken}`;
-        window.location.href = redirectUrl;
-    } else {
-        console.error("Access Token Not Found in Fragment");
-        document.body.innerHTML = "<h1>Error: Access Token not found!</h1>";
-    }
-</script>
+        if (accessToken) {
+            console.log("Access Token Found:", accessToken);
 
+            // Ubah fragment menjadi query string
+            const redirectUrl = `/api/callback?access_token=${accessToken}`;
+            console.log("Redirecting to:", redirectUrl);
+
+            // Redirect ke API callback
+            window.location.href = redirectUrl;
+        } else {
+            console.error("Access Token Not Found in Fragment");
+            document.body.innerHTML = "<h1>Error: Access Token not found!</h1>";
+        }
     </script>
 </body>
 </html>
