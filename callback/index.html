@@ -8,19 +8,23 @@
 <body>
     <h1>Processing Access Token...</h1>
     <script>
-        // Ambil fragment dari URL (hash)
-        const hash = window.location.hash;
-        const tokenMatch = hash.match(/access_token=([^&]+)/);
-        const accessToken = tokenMatch ? tokenMatch[1] : null;
+        <script>
+    const hash = window.location.hash;
+    console.log("URL Fragment:", hash);
 
-        if (accessToken) {
-            // Redirect ulang ke server API dengan query string
-            const redirectUrl = `/api/callback?access_token=${accessToken}`;
-            window.location.href = redirectUrl;
-        } else {
-            // Jika tidak ada access_token, tampilkan pesan error
-            document.body.innerHTML = "<h1>Error: Access Token not found!</h1>";
-        }
+    const tokenMatch = hash.match(/access_token=([^&]+)/);
+    const accessToken = tokenMatch ? tokenMatch[1] : null;
+
+    if (accessToken) {
+        console.log("Access Token Found:", accessToken);
+        const redirectUrl = `/api/callback?access_token=${accessToken}`;
+        window.location.href = redirectUrl;
+    } else {
+        console.error("Access Token Not Found in Fragment");
+        document.body.innerHTML = "<h1>Error: Access Token not found!</h1>";
+    }
+</script>
+
     </script>
 </body>
 </html>
